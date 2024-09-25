@@ -5,18 +5,18 @@
 </h5>
 
 
-## Subjective Response Indicators for Advertisement Videos Dataset (SRI-ADV)
-The SRI-ADV dataset collects brainwave and eye movement responses from individuals of various ages, genders, and professions while watching advertisement videos, using advanced EEG and eye-tracking technologies. It focuses on revealing viewers' subjective reactions to advertisement videos. This dataset not only provides a wealth of multimodal labels but also introduces new ways to assess video attractiveness and understand viewers' implicit reactions.
+## Video Subjective Multi-modal Evaluation dataset (Video-SME)
+The Video-SME dataset collects brainwave and eye movement responses from individuals of various ages, genders, and professions while watching advertisement videos, using advanced EEG and eye-tracking technologies. It focuses on revealing viewers' subjective reactions to advertisement videos. This dataset not only provides a wealth of multimodal labels but also introduces new ways to assess video attractiveness and understand viewers' implicit reactions.
 <div align="center"><img src="./assets/dataset-intro.jpg" alt="Dataset Introduction" style="width:600px"></div>
 
 ### 🎯 Dataset Features
-The SRI-ADV dataset includes **498 Chinese advertisement videos** from different fields, such as food and beverages, household items, consumer electronics, culture and tourism, software, and automobiles, with video durations of **15-30 seconds**. Compared to other datasets, the video content of the SRI-ADV dataset is rich in narrative, unique in visual aesthetics, and deep in audience insight.
+The Video-SME dataset includes **498 Chinese advertisement videos** from different fields, such as food and beverages, household items, consumer electronics, culture and tourism, software, and automobiles, with video durations of **15-30 seconds**. Compared to other datasets, the video content of the Video-SME dataset is rich in narrative, unique in visual aesthetics, and deep in audience insight.
 
 ### 📊 Data Protocol
-The SRI-ADV dataset is divided into subjective and objective tasks. Subjective tasks focus on **examining audience subjective reactions**, while objective tasks focus on the qualitative analysis of **video content and audience perception**.
+The Video-SME dataset is divided into subjective and objective tasks. Subjective tasks focus on **examining audience subjective reactions**, while objective tasks focus on the qualitative analysis of **video content and audience perception**.
 
 #### 1. Subjective Tasks
-These tasks aim to explore the impact of video content and user characteristics on SRI through classification tasks. We developed two experimental protocols to guide this research.
+These tasks aim to explore the impact of video content and user characteristics on Subjective Response Indicators (**SRI**) through classification tasks. We developed two experimental protocols to guide this research.
 * **Protocol 1 (P1)**: Aimed at assessing the SRI capability of a broad audience by analyzing the average reaction in different videos. This method is relatively direct.
 * **Protocol 2 (P2)**: Adds a layer of complexity based on P1, focusing on the SRI recognition ability of specific user groups. This requires a comprehensive examination of the variation in reaction patterns among different user groups.
 
@@ -24,7 +24,7 @@ These tasks aim to explore the impact of video content and user characteristics 
 These tasks aim to objectively determine the narrative coherence of advertisement content and its effectiveness in attracting the target audience. In terms of evaluation, it follows the evaluation paradigm in [Video-ChatGPT](https://github.com/mbzuai-oryx/Video-ChatGPT/tree/main/quantitative_evaluation) to score the accuracy of generated answers.
 
 #### 3. Overview of Tasks and Protocols
-The table below presents an overview of the tasks, protocols, and the number of instructions in the SRI-ADV dataset.
+The table below presents an overview of the tasks, protocols, and the number of instructions in the Video-SME dataset.
 
 | Task Name | 1. Subjectivity | 2. Objectivity |
 | --- | --- | --- |
@@ -36,9 +36,9 @@ The table below presents an overview of the tasks, protocols, and the number of 
 | Test Q&A | 2,640 & 26,724 | 954 |
 
 ### 🌏 Data Collection Process
-The SRI-ADV data collection is divided into two processes: subjective index generation and objective Q&A generation. The overall collection process is illustrated as follows:
+The Video-SME data collection is divided into two processes: subjective index generation and objective Q&A generation. The overall collection process is illustrated as follows:
 ![Dataset Generation Process](./assets/dataset_generation.jpg)
-<details><summary>Caption of Generation pipeline of SRI-ADV dataset</summary><p>
+<details><summary>Caption of Generation pipeline of Video-SME dataset</summary><p>
 The left side of this figure illustrates the process of SRI data collection, computation, and amalgamation. This involves acquiring raw signals from subjects, processing signals by video scenes, and pooling data from subjects with similar demographic profiles to obtain aggregated subjective response indicators and instruction for language models. The middle section depicts the video preprocessing with Frame Sequence for Video Representation (FSVR) by scene detection and Automatic Speech Recognition (ASR) for videos. On the right side, we present our proposed semi-automated video Q&A generation process, which leverages both video storyboarding from FSVR and dialogue text from ASR. This integration enriches video content comprehension, thereby facilitating both Subjectivity and Objectivity Tasks.
 </p></details>
 
@@ -59,13 +59,13 @@ Participants collect their raw electroencephalogram (EEG) and eye movement signa
 * Semi-automated Annotation Process: Developed a semi-automated annotation process, using the ChatGPT4-Vision (GPT4V) tool, combined with keyframes obtained from FSVR preprocessing, to generate objective Q&As of video content. By randomly selecting questions from the question set to increase the diversity of Q&As, and undergoing final review and proofreading by human annotators.
 
 ### 📝 Data Examples
-Data examples from SRI-ADV and the inference results of different models are shown below.
+Data examples from Video-SME and the inference results of different models are shown below.
 ![Dataset Examples](./assets/dataset_examples.jpg)
-> Data examples and qualitative analysis from SRI-ADV. The left side of the image shows the ground truth; the right side shows inference results from different models, where green represents accurate descriptions, and red indicates incorrect responses.
+> Data examples and qualitative analysis from Video-SME. The left side of the image shows the ground truth; the right side shows inference results from different models, where green represents accurate descriptions, and red indicates incorrect responses.
 
 ### 📡 Dataset Comparison
 <details><summary>Comparison</summary><p>
-Compared to other datasets suitable for video parsing, SRI-ADV has more modalities, a longer average answer text length (99.6), and a larger median number of storyboards (11). This means each advertisement video in SRI-ADV contains a larger amount of content information, increasing the difficulty and complexity of video comprehension tasks.
+Compared to other datasets suitable for video parsing, Video-SME has more modalities, a longer average answer text length (99.6), and a larger median number of storyboards (11). This means each advertisement video in Video-SME contains a larger amount of content information, increasing the difficulty and complexity of video comprehension tasks.
 > AP in the table stands for Audience Profiles.
 
 | Datasets| Video source | Q&A generation | Q&A tasks| Modality| Videos | Q&A pairs |AvgAnsLen | MedScene |
@@ -75,7 +75,7 @@ Compared to other datasets suitable for video parsing, SRI-ADV has more modaliti
 | TGIF-QA | TGIF| Auto&Human| OE & MC| Frame/Video|56,720|103,919|1.5|1|
 | ActivityNet-QA | ActivityNet| Human| OE| Video|5,800|58,000|1.3|7|
 | Video-ChatGPT | ActivityNet| Auto&Human| OE| Video|200|2,994|51.0|6|
-| **SRI-ADV** (ours)| Custom| Auto&Human| MC & OE| **Video/EEG/EMR/AP** |498|178,547| **99.6** | **11** |
+| **Video-SME** (ours)| Custom| Auto&Human| MC & OE| **Video/EEG/EMR/AP** |498|178,547| **99.6** | **11** |
 </p></details>
 
 -----
